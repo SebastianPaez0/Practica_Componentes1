@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="jakarta.faces.html"
+	  xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Departamentos y Municipio</title>
+	</h:head>
+
+	<h:body>
+		<h1>#{mybean.mensaje()}</h1>
+		<div class="card">
+	    <h:form id="form">
+	        <p:dataTable var="m" value="#{deptBean.listaMunicipios}"
+             rowIndexVar="indice"
+             rowGroupMode="rowspan"
+             groupChildren="true"
+             sortBy="#{m.departamento.nombre}"
+             paginator="true"
+             rows="20"
+             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+             rowsPerPageTemplate="10,20,50,1200">
+
+			    <p:column headerText="N°">
+			        <h:outputText value="#{indice + 1}" />
+			    </p:column>
+			
+			    <p:column headerText="Departamento" groupRow="false" sortBy="#{m.departamento.nombre}">
+			        <h:outputText value="#{m.departamento.nombre}" />
+			    </p:column>
+			
+			    <p:column headerText="Código Municipio" sortBy="#{m.codMpio}">
+			        <h:outputText value="#{m.codMpio}" />
+			    </p:column>
+			
+			    <p:column headerText="Municipio"
+			              sortBy="#{m.nombre}"
+			              filterBy="#{m.nombre}"
+			              filterMatchMode="contains">
+			        <h:outputText value="#{m.nombre}" />
+			    </p:column>
+			
+			    <p:column headerText="Tipo Municipio"
+			              sortBy="#{m.tipoMunicipio}">
+			        <h:outputText value="#{m.tipoMunicipio}" />
+			    </p:column>
+			
+			    <p:column headerText="Coordenadas">
+			        <h:outputText value="#{m.latitud}, #{m.longitud}" />
+			    </p:column>
+			
+			</p:dataTable>
+	    </h:form>
+	</div>
+	</h:body>
+</html>
